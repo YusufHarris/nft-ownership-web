@@ -29,7 +29,7 @@ export default {
   computed: {
     ...mapState('connector', ['isWalletConnected', 'account']),
     getAccount() {
-     
+
       return this.account
         ? this.$options.filters.truncate(this.account, 9)
         : this.btnText
