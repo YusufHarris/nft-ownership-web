@@ -8,7 +8,7 @@ export const state = () => ({
     totalOwned : null,
     totalFilter : null
   })
-  
+
   export const mutations = {
     setProvider(state, payload) {
       state.provider = payload
@@ -31,7 +31,7 @@ export const state = () => ({
   }
 
   export const actions = {
-    
+
     async readNftOfWallet({ commit, dispatch }, input) {
       try {
 
@@ -49,16 +49,16 @@ export const state = () => ({
 
         console.log('post data : ',  data);
 
-        const res = 
+        const res =
             await axios.post(NFT_QUERY, data, {
             headers: {
                 // Overwrite Axios's automatically set Content-Type
                 'Content-Type': 'application/json'
             }
             });
-        
-        
-    
+
+
+
         return res.data.data; // '{"answer":42}'
 
 
@@ -74,4 +74,3 @@ export const state = () => ({
     account: (state) => state.account,
     signer: (state) => state.signer,
   }
-  

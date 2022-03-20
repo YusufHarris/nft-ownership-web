@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
 
-  
+
   <v-col cols="12" sm="8" md="6">
        <v-row> <br></v-row>
 
@@ -36,7 +36,7 @@
       </v-list>
 
       <v-row v-if="checkAlreadyVerified">
-       
+
           <v-text-field
                      v-model="username"
                     label="Metacraft username"
@@ -49,14 +49,14 @@
             :disabled=!checkWallet
             color="success"
             @click="submitUsername()"
-          
+
           >
             {{ checkWallet ?  checkAlreadyVerified ? 'Submit username' : 'Verify NFT' : 'Connect wallet first' }}
             <template v-slot:loader>
               <span>Loading...</span>
             </template>
           </v-btn>
-        
+
 
       </v-row>
        <v-row v-else>
@@ -65,7 +65,7 @@
           :disabled=!checkWallet
           color="success"
           @click="verifyNft()"
-         
+
         >
           {{ checkWallet ?  checkAlreadyVerified ? 'Submit username' : 'Verify NFT' : 'Connect wallet first' }}
           <template v-slot:loader>
@@ -74,11 +74,11 @@
         </v-btn>
 
        </v-row>
-      
-      
+
+
     </v-col>
   </v-row>
- 
+
 </template>
 
 <script>
@@ -169,7 +169,7 @@ export default {
         subtitle: "<a href='https://www.google.com' target='_blank'> link </a>"
       },
     ],
-    
+
 
     }
   },
@@ -186,8 +186,8 @@ export default {
     checkAlreadyVerified(){
       return this.items && this.items.length > 0 ? true : false;
     }
-    
-   
+
+
   },
   mounted (){
 
@@ -200,9 +200,9 @@ export default {
   },
   created() {
     // console.log('Window obj ', window )
-   
+
   },
-  methods: 
+  methods:
   {
 
     async submitUsername()
@@ -223,7 +223,7 @@ export default {
         return;
       }
 
-       // !checkApplyButtonStatus() 
+       // !checkApplyButtonStatus()
       console.log('Store wallet and username of database ');
 
       let self = this;
@@ -232,8 +232,8 @@ export default {
         "Content-Type" : 'application/json'
       }
       axios
-        .post(BACKEND_URL, 
-        { 
+        .post(BACKEND_URL,
+        {
           wallet :  this.account,
           username : this.username,
           items :  JSON.stringify(this.items)
@@ -254,9 +254,9 @@ export default {
         .finally(() => console.log('finally'))
 
 
-      
+
     },
-   async verifyNft () 
+   async verifyNft ()
     {
       console.log('******* verify nfts ************' );
       let wallet = this.account; //'0x3Ca48686212Af897019a8E89140e64E8F2cC2f30'
@@ -275,7 +275,7 @@ export default {
       console.log('Chain name ', chainName[0].name );
 
       let result = await this.$store.dispatch('nft-ownership/readNftOfWallet',{ wallet : wallet, chainName : chainName[0].name  }  );
-      
+
       console.log('result : ', result );
       this.totalNft = result.totalFilter;
 
@@ -290,7 +290,7 @@ export default {
 
       const REPLACE_LINK = "<a href='$LINK' target='_blank'> $LINK </a>";
       let nftData = [ { header: "NFT's owned by wallet" } ]
-      
+
       if(nfts && nfts.length > 0 )
       {
         let id = 1;
@@ -322,7 +322,7 @@ export default {
 
           nftData.push(newItem)
           nftData.push({ divider: true, inset: true, id : id++ })
-          
+
         }
         this.items = nftData;
       }
